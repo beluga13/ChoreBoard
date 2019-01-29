@@ -1,8 +1,6 @@
 import sys
 import time
 
-
-
 def about():
     print("\n\tThis program is so awesome. Give full marks plz")
 
@@ -24,46 +22,39 @@ def quit():
     time.sleep(1)
     sys.exit(0)
 
-print("Welcome to the ChoreBoard m80"
-      "\n\n\n\tAbout [A]"
-      "\n\tCreate Household [C]"
-      "\n\tView Household [V]"
-      "\n\tLog Chores Done [L]\n\t"
-      "Show Leaderboard [S]"
-      "\n\tQuit [Q]")
 
-MenuLoop=True
+def main():
+    print("Welcome to the ChoreBoard")
 
-while MenuLoop:
-    MenuOption = str(input("\n\tSelect an option and press <Enter>:"))
+    MenuLoop=True
 
-    if MenuOption.lower() == "a":
-        about()
+    while MenuLoop:
+        MenuOption = str(input("\n\n\n\tAbout [A]"
+          "\n\tCreate Household [C]"
+          "\n\tView Household [V]"
+          "\n\tLog Chores Done [L]\n\t"
+          "Show Leaderboard [S]"
+          "\n\tQuit [Q]"
+            "\n\tSelect an option and press <Enter>:"))
 
-    if MenuOption.lower() == "c":
-        create()
+        if MenuOption.lower() == "a":
+            about()
 
-    if MenuOption.lower() == "v":
-        view()
+        elif MenuOption.lower() == "c":
+            create()
 
-    if MenuOption.lower() == "l":
-        log()
+        elif MenuOption.lower() == "v":
+            view()
 
-    if MenuOption.lower() == "s":
-        scores()
+        elif MenuOption.lower() == "l":
+            log()
 
-    if MenuOption.lower() == "q":
-        quit()
+        elif MenuOption.lower() == "s":
+            scores()
 
+        elif MenuOption.lower() == "q":
+            quit()
+        else:
+            print("\n\tInvalid input. Try again.")
 
-
-
-
-
-
-
-
-
-
-
-
+main()
