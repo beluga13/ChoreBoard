@@ -1,7 +1,7 @@
 #Course: COMP0015 Introduction to Programming
 #Instructor: Rae Harbird
 #Date: 05/02/2019
-#Name:choreChartCoursework.py
+#Name:ChoreBoard.py
 #Description: Coursework Deliverable 1 - Main Menu and Create a Household
 #Author(s): Ryan Sulit Velasquez (ID:17018087), Mohammed Hasan (ID:17014291)
 
