@@ -1,96 +1,149 @@
+#Course: COMP0015 Introduction to Programming
+#Instructor: Rae Harbird
+#Date: 05/02/2019
+#Name:choreChartCoursework.y
+#Description: Coursework Deliverable 1 - Main Menu and Create a Household
+#Author(s): Ryan Sulit Velasquez (ID:17018087), Mohammed Hasan (ID:17014291)
+
 import sys
-import time
+import time               
+import textwrap           #Use in descriptions
 
-def about():
-    print("\n\tThis program is so awesome. Give full marks plz")
+########################################################################################
+# about()
+# This function gives the description of the application itself, using
+# the textwrap module to fit the window.
+# Input: None.
+# Returns: Written text (ie. description)
+def about():                            
+    textAbout = ("Welcome to the ChoreBoard! The purpose of this application is to " +
+             "aid housemates in keeping a record of which chores need doing and to " +
+             "assign who does each specific chore.")
+    print("")
+    for line in textwrap.wrap(textAbout, width=50):
+        print(line)
 
+########################################################################################
+# creating()
+# This function allows the user to input certain details, such as household name, participant
+# name, chore name, and chore frequencies within a text file.
+# Inputs: Names/Frequencies/etc.
+# Returns: Certain strings(chores, household, participant, etc.)
 def creating():
-    HouseHold=str(input("Enter your household's name: "))
-    text=open(HouseHold+'.txt','w')
-    text.write("\nHousehold's Name: "+HouseHold)
+    household=str(input("Enter your household's name: "))
+    textHousehold=open(household+'.txt','w')
+    textHousehold.write("\nHousehold's Name: "+household)
+    print("Enter participant's names:" + "")
+    print("")
 
-    Members=True
-    Counter=1
-    while str(Members) != "":
-        Members=str(input("Enter the name of participant" + str(Counter) + ": "))
-        if str(Members) != "":
-            text.write("\nParticipant " + str(Counter) + ": "  + Members)
-            Counter = Counter + 1
-
-    Chores=True
-    Counter=1
-    while str(Chores) != "":
-        Chores=str(input("Enter chore " + str(Counter) + ": "))
-        if Chores != "":
+    members=True
+    counter=1
+    while str(members) != "":
+        members=str(input("\tEnter the name of participant " + str(counter) + ": "))
+        if str(members) != "":
+            textHousehold.write("\nParticipant " + str(counter) + ": "  + members)
+            counter += 1
+    
+    print("\n" + "Enter chores:")
+    chores=True
+    counter=1
+    while str(chores) != "":
+        chores=str(input("\tEnter chore #" + str(counter) + ": "))
+        if chores != "":
             while True:
                     try:
-                        Freq=int(input("What is the weekly frequency of this chore" + str(Counter) + ": "))
-                        while Freq < 0:
-                            print("Enter a positive frequency")
-                            Freq=int(input("What is the weekly frequency of this chore " + str(Counter) + ": "))
-                        text.write("\nChore: " + str(Chores) + "\n\t Times per week: " + str(Freq))
-                        Counter = Counter + 1
+                        choreFreq=int(input("\t\tTimes per week:"))
+                        while choreFreq < 0:
+                            print("Enter a positive frequency.")
+                            choreFreq=int(input("\t\tTimes per week:"))
+                        textHousehold.write("\nChore: " + str(chores) + "\n\t Times per week: " + str(choreFreq))
+                        counter += 1
                         break
                     except ValueError:
-                        print("Enter a number")
-        
+                        print("Please enter a number.")
+
+########################################################################################
+# view()
+# This function allows the user to view previous inputs created by creating().
+# Input: None.
+# Returns: Inputs inside creating()
 def view():
-    search=str(input("Enter the household you would like to view: "))
+    searchHousehold=str(input("Enter the household you would like to view: "))
     try:
-        text=open(search+'.txt','r')
-        text_contents=text.read()
-        print(text_contents)
+        textHousehold=open(searchHousehold+'.txt','r')
+        textContents=textHousehold.read()
+        print(textContents)
     except:
-        print("\n\tThe househould you have entered does not exist")
+        print("\n\tThe household you have entered does not exist")
 
+########################################################################################
+# log()
+# This function allows the user to view the log of chores done / completed.
+# Input: None.
+# Returns: n/a
 def log():
-    print("\n\tLogging scores function pending")
+    print("\n\tLogging chores function pending")
 
+########################################################################################
+# scores()
+# This function allows the user to view leaderboard of scores.
+# Input: None.
+# Returns: n/a
 def scores():
     print("\n\tScoreboard pending")
 
+########################################################################################
+# quit()
+# This function allows the user quit the application.
+# Input: None.
+# Returns: System exit.
 def quit():
-    MenuLoop=False
-    print("\n\tCya m8")
+    menuLoop=False
+    print("\n\tThank you for using ChoreBoard!")
     time.sleep(1)
     sys.exit(0)
 
-
+########################################################################################
+# main()
+# This is the main function of the application, where all of the previous functions are used.
+# The main() function is what runs when the .py file is initialised.
+# Input: None.
+# Returns: System exit.
 def main():
-    print("Welcome to the ChoreBoard")
+    print("Welcome to the ChoreBoard!")
 
-    MenuLoop=True
+    menuLoop=True
 
-    while MenuLoop:
-        MenuOption = str(input("\n\n\n\tAbout [A]"
+    while menuLoop:
+        menuOption = str(input("\n\n\n\tAbout [A]"
           "\n\tCreate Household [C]"
           "\n\tView Household [V]"
           "\n\tLog Chores Done [L]\n\t"
           "Show Leaderboard [S]"
           "\n\tQuit [Q]"
-            "\n\tSelect an option and press <Enter>:"))
+          "\n\tSelect an option and press <Enter>:"))
 
-        if MenuOption.lower() == "a":
+        if menuOption.lower() == "a":                        #Accepts lower-/upper-case
             about()
+            
 
-        elif MenuOption.lower() == "c":
+        elif menuOption.lower() == "c":
             creating()
 
-        elif MenuOption.lower() == "v":
+        elif menuOption.lower() == "v":
             view()
 
-        elif MenuOption.lower() == "l":
+        elif menuOption.lower() == "l":
             log()
 
-        elif MenuOption.lower() == "s":
+        elif menuOption.lower() == "s":
             scores()
 
-        elif MenuOption.lower() == "q":
+        elif menuOption.lower() == "q":
             quit()
 
         else:
             print("\n\tInvalid input. Try again.")
 
-main()
-
-
+if __name__ == "__main__" :
+    main()
