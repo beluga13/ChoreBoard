@@ -57,7 +57,7 @@ def creating():
             while True:
                     try:
                         choreFreq=int(input("\t\tTimes per week: "))
-                        while choreFreq < 0:
+                        while choreFreq < 1:
                             print("Enter a positive frequency.")
                             choreFreq=int(input("\t\tTimes per week: "))
                         textHousehold.write("\n\t" + str(chores) + " (" + str(choreFreq) + ")")
