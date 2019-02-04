@@ -84,7 +84,8 @@ def view():
         
     except:
         print("\n\tThe household you have entered does not exist.")
-    
+        time.sleep(1)
+        view()
     time.sleep(1)
     menuReturn=input("\nPress <Enter> to return to the main menu:")
 ########################################################################################
