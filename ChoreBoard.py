@@ -22,6 +22,8 @@ def about():
     print("")
     for line in textwrap.wrap(textAbout, width=50):
         print(line)
+    time.sleep(1)
+    menuReturn=input("\nPress <Enter> to return to the main menu:")
 
 ########################################################################################
 # creating()
@@ -30,37 +32,42 @@ def about():
 # Inputs: Names/Frequencies/etc.
 # Returns: Certain strings(chores, household, participant, etc.)
 def creating():
-    household=str(input("Enter your household's name: "))
+    household=str(input("\nEnter your household's name: "))
     textHousehold=open(household+'.txt','w')
-    textHousehold.write("\nHousehold's Name: "+household)
+    textHousehold.write("\n"+household+"\n")
     print("Enter participant's names:" + "")
     print("")
 
+    textHousehold.write("\nParticipants:")
     members=True
     counter=1
     while str(members) != "":
         members=str(input("\tEnter the name of participant " + str(counter) + ": "))
         if str(members) != "":
-            textHousehold.write("\nParticipant " + str(counter) + ": "  + members)
+            textHousehold.write("\n\t" + str(counter) + ". "  + members)
             counter += 1
     
     print("\n" + "Enter chores:")
+    textHousehold.write("\n"+"\nWeekly Chores:")
     chores=True
     counter=1
     while str(chores) != "":
-        chores=str(input("\tEnter chore #" + str(counter) + ": "))
+        chores=str(input("\tChore " + str(counter) + ": "))
         if chores != "":
             while True:
                     try:
-                        choreFreq=int(input("\t\tTimes per week:"))
+                        choreFreq=int(input("\t\tTimes per week: "))
                         while choreFreq < 0:
                             print("Enter a positive frequency.")
-                            choreFreq=int(input("\t\tTimes per week:"))
-                        textHousehold.write("\nChore: " + str(chores) + "\n\t Times per week: " + str(choreFreq))
+                            choreFreq=int(input("\t\tTimes per week: "))
+                        textHousehold.write("\n\t" + str(chores) + " (" + str(choreFreq) + ")")
                         counter += 1
                         break
                     except ValueError:
                         print("Please enter a number.")
+    else:
+        time.sleep(1)
+        menuReturn=input("\nPress <Enter> to return to the main menu:")
 
 ########################################################################################
 # view()
@@ -73,16 +80,22 @@ def view():
         textHousehold=open(searchHousehold+'.txt','r')
         textContents=textHousehold.read()
         print(textContents)
+        
+        
     except:
-        print("\n\tThe household you have entered does not exist")
-
+        print("\n\tThe household you have entered does not exist.")
+    
+    time.sleep(1)
+    menuReturn=input("\nPress <Enter> to return to the main menu:")
 ########################################################################################
 # log()
 # This function allows the user to view the log of chores done / completed.
 # Input: None.
 # Returns: n/a
 def log():
-    print("\n\tLogging chores function pending")
+    print("\n\tChore logging still pending.")
+    time.sleep(1)
+    menuReturn=input("\nPress <Enter> to return to the main menu:")
 
 ########################################################################################
 # scores()
@@ -90,8 +103,9 @@ def log():
 # Input: None.
 # Returns: n/a
 def scores():
-    print("\n\tScoreboard pending")
-
+    print("\n\tScoreboard still pending.")
+    time.sleep(1)
+    menuReturn=input("\nPress <Enter> to return to the main menu:")
 ########################################################################################
 # quit()
 # This function allows the user quit the application.
@@ -110,12 +124,12 @@ def quit():
 # Input: None.
 # Returns: System exit.
 def main():
-    print("Welcome to the ChoreBoard!")
-
+    
     menuLoop=True
 
     while menuLoop:
-        menuOption = str(input("\n\n\n\tAbout [A]"
+        print("\n"+"Welcome to the ChoreBoard!")
+        menuOption = str(input("\n\n\tAbout [A]"
           "\n\tCreate Household [C]"
           "\n\tView Household [V]"
           "\n\tLog Chores Done [L]\n\t"
