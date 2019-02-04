@@ -33,8 +33,8 @@ def about():
 # Returns: Certain strings(chores, household, participant, etc.)
 def creating():
     household=str(input("\nEnter your household's name: "))
-    textHousehold=open(household+'.txt','w')
-    textHousehold.write("\n"+household+"\n")
+    textHousehold=open(household.lower() + '.txt', 'w')
+    textHousehold.write("\n" + household + "\n")
     print("Enter participant's names:" + "")
     print("")
 
@@ -48,7 +48,7 @@ def creating():
             counter += 1
     
     print("\n" + "Enter chores:")
-    textHousehold.write("\n"+"\nWeekly Chores:")
+    textHousehold.write("\n" + "\nWeekly Chores:")
     chores=True
     counter=1
     while str(chores) != "":
@@ -77,7 +77,7 @@ def creating():
 def view():
     searchHousehold=str(input("Enter the household you would like to view: "))
     try:
-        textHousehold=open(searchHousehold+'.txt','r')
+        textHousehold=open(searchHousehold.lower() + '.txt', 'r')
         textContents=textHousehold.read()
         print(textContents)
         
