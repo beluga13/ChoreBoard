@@ -33,8 +33,8 @@ def about():
 # Returns: Certain strings(chores, household, participant, etc.)
 def creating():
     household=str(input("\nEnter your household's name: "))
-    textHousehold=open(household+'.txt','w')
-    textHousehold.write("\n"+household+"\n")
+    textHousehold=open(household.lower() + '.txt', 'w')
+    textHousehold.write("\n" + household + "\n")
     print("Enter participant's names:" + "")
     print("")
 
@@ -48,7 +48,7 @@ def creating():
             counter += 1
     
     print("\n" + "Enter chores:")
-    textHousehold.write("\n"+"\nWeekly Chores:")
+    textHousehold.write("\n" + "\nWeekly Chores:")
     chores=True
     counter=1
     while str(chores) != "":
@@ -57,7 +57,7 @@ def creating():
             while True:
                     try:
                         choreFreq=int(input("\t\tTimes per week: "))
-                        while choreFreq < 0:
+                        while choreFreq < 1:
                             print("Enter a positive frequency.")
                             choreFreq=int(input("\t\tTimes per week: "))
                         textHousehold.write("\n\t" + str(chores) + " (" + str(choreFreq) + ")")
@@ -77,14 +77,13 @@ def creating():
 def view():
     searchHousehold=str(input("Enter the household you would like to view: "))
     try:
-        textHousehold=open(searchHousehold+'.txt','r')
+        textHousehold=open(searchHousehold.lower() + '.txt', 'r')
         textContents=textHousehold.read()
         print(textContents)
         
         
     except:
         print("\n\tThe household you have entered does not exist.")
-    
     time.sleep(1)
     menuReturn=input("\nPress <Enter> to return to the main menu:")
 ########################################################################################
