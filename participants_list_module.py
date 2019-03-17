@@ -37,14 +37,14 @@ class Participants():
     def __str__(self):
         participant_length = len(self.participants)
         i = 1
-        participants_string = ""
+        participant_string = ""
         for participant in self.participants :
             participant_string = participant_string + str(participant)
             if i < participant_length :
-                chore_string = chore_string + ", "
+                participant_string = participant_string + ", "
             i = i + 1
             
-        return participants_string
+        return participant_string
 
 
     ## Check the set of participants.
@@ -78,18 +78,20 @@ class Participants():
     #
     @staticmethod
     def is_valid_name(name) :
-        if len(name) < Participants.MINIMUM_NAME_LENGTH \
-            or len(name) > Participants.MAXIMUM_NAME_LENGTH :
-            raise ValueError(("Participant Name: {}, is not valid. It should be " +
-                        "more than {} characters long " +
-                        "and less than {} characters long.")
-                .format(name, Participants.MINIMUM_NAME_LENGTH, Participants.MAXIMUM_NAME_LENGTH))
+        for i in name:
+            
+            if len(i) < Participants.MINIMUM_NAME_LENGTH \
+                or len(i) > Participants.MAXIMUM_NAME_LENGTH :
+                raise ValueError(("Participant Name: {}, is not valid. It should be " +
+                            "more than {} characters long " +
+                            "and less than {} characters long.")
+                    .format(i, Participants.MINIMUM_NAME_LENGTH, Participants.MAXIMUM_NAME_LENGTH))
         
-        str_name = str(name)
-        if str_name.isalum():
-            raise ValueError(("{}, is not valid. Names in the ParticipantList should be " +
-                                  "alphanumeric.").format(letter))
-    
+            str_name = str(i)
+            if not str_name.isalnum():
+                raise ValueError(("{}, is not valid. Names in the ParticipantList should be " +
+                                      "alphanumeric.").format(i))
+
         return True
 
     ## Check the number of participants in the set is the right length.
@@ -103,8 +105,8 @@ class Participants():
             raise ValueError (("\n\t\tThe number of participants in the household must be" +
                 " be more than {} and less than {}.")
                 .format(Participants.MINIMUM_HOUSEHOLD_SIZE - 1, Participants.MAXIMUM_HOUSEHOLD_SIZE + 1))
- 
-        # If we reached this point then the checks passed
+    
+    # If we reached this point then the checks passed
         return True
     
     @staticmethod
@@ -153,10 +155,10 @@ def main():
         print("\tVALID: ", p)
     except Exception as err:
         print("\tERROR: ", err)   
-    
+
     print("\nTest 5: Create a set of participants with invalid name, punctuation character")    
     try:
-        names = set(["*","personB","personC"])
+        names = set(["***","personB","personC"])
         p = Participants(names)
         print("\tVALID: ", p)
     except Exception as err:
