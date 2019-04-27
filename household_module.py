@@ -7,7 +7,7 @@ class Household() :
     MINIMUM_NAME_LENGTH = 3     # Used to validate household name 
     MAXIMUM_NAME_LENGTH = 10
 
-    MINIMUM_HOUSEHOLD_SIZE = 4  # Used to validate the number of people in
+    MINIMUM_HOUSEHOLD_SIZE = 2  # Used to validate the number of people in
                                 # a household.  
     MAXIMUM_HOUSEHOLD_SIZE = 5
     
@@ -41,9 +41,14 @@ class Household() :
     #  @param name the household name        
     @household_name.setter
     def household_name(self, name) :
-        self._household_name = name
+        try :
+            self.is_valid_name(name)
+            self._household_name = name
+        except ValueError as err :
+            raise
  
-                               
+    def __str__(self):
+        return self.household_name                           
     ## Return the participant names.
     # Note: The participants attribute is a Participants object.
     #       Use the Participants class to create this object.
@@ -93,8 +98,7 @@ class Household() :
                                                   self.chores.chores)
 
 
-    def __str__(self):
-        return "TO BE COMPLETED"
+
     
 
     ## Generate a string representation of the chore log.
@@ -126,7 +130,20 @@ class Household() :
     #
     @staticmethod
     def is_valid_name(name) :
-        return True
+        
+            if len(name) < Household.MINIMUM_NAME_LENGTH \
+            or len(name) > Household.MAXIMUM_NAME_LENGTH :
+                raise ValueError(("Household Name: {}, is not valid. It should be" +
+                            "more than {} characters long and less than {} "
+                            "characters long.")
+                    .format(name, Household.MINIMUM_NAME_LENGTH, Household.MAXIMUM_NAME_LENGTH))
+            
+            for i in name:
+                if not i.isalnum() :
+                    raise ValueError(("{}, is not valid. Household name sould be " +
+                                      "alphanumeric.").format(i))
+
+            return True
 
 
     @staticmethod
@@ -169,7 +186,7 @@ def main():
 
     print("\nTest 3: Create a household with an invalid name '*'")    
     try:
-        h = Household("*", {"personA","personB","personC"}, {Chore("wash up", 4), Chore("vacuum stairs", 2), Chore("dusting",1),
+        h = Household("***", {"personA","personB","personC"}, {Chore("wash up", 4), Chore("vacuum stairs", 2), Chore("dusting",1),
                        Chore("empty bin", 2)})
         print("\n\tVALID: ", h)
     except Exception as err:

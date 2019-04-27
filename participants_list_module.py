@@ -30,7 +30,7 @@ class Participants():
         try :
             self.valid_participants(the_participants)
             self._participants = the_participants
-        except ValueError as err :
+        except (ValueError,TypeError) as err :
             raise
 
 
@@ -63,8 +63,8 @@ class Participants():
         
         try :
             Participants.is_valid_length(the_participants)
-            Participants.is_valid_name(the_participants)
-        except ValueError as err :
+            Participants.is_valid_name_set(the_participants)
+        except (ValueError,TypeError) as err :
             raise
         
         return True
@@ -77,23 +77,37 @@ class Participants():
     #           generate an exception if not.
     #
     @staticmethod
-    def is_valid_name(name) :
+    def is_valid_name_set(name) :
         for i in name:
-            
             if len(i) < Participants.MINIMUM_NAME_LENGTH \
                 or len(i) > Participants.MAXIMUM_NAME_LENGTH :
                 raise ValueError(("Participant Name: {}, is not valid. It should be " +
                             "more than {} characters long " +
                             "and less than {} characters long.")
                     .format(i, Participants.MINIMUM_NAME_LENGTH, Participants.MAXIMUM_NAME_LENGTH))
-        
-            str_name = str(i)
-            if not str_name.isalnum():
+                   
+                
+            if not i.isalnum():
                 raise ValueError(("{}, is not valid. Names in the ParticipantList should be " +
                                       "alphanumeric.").format(i))
+    
+        return True
+    
+    @staticmethod
+    def is_valid_name_indiv(name) :
+        if len(name) < Participants.MINIMUM_NAME_LENGTH \
+            or len(name) > Participants.MAXIMUM_NAME_LENGTH :
+            raise ValueError(("Participant Name: {}, is not valid. It should be " +
+                        "more than {} characters long " +
+                        "and less than {} characters long.")
+                .format(name, Participants.MINIMUM_NAME_LENGTH, Participants.MAXIMUM_NAME_LENGTH))
+
+        for i in name:
+            if not i.isalnum():
+                raise ValueError(("{}, is not valid. Names in the ParticipantList should be " +
+                                      "alphanumeric.").format(name))
 
         return True
-
     ## Check the number of participants in the set is the right length.
     # 
     # @return True if valid and generate an exception if not.
@@ -166,7 +180,7 @@ def main():
 
     print("\nTest 6: Create a set of participants with name too long")    
     try:
-        names = set(["tooooooooolllllllooooooonnnnnggggg","personB","personC"])
+        names = set(["tooooooolongggggg","personB","personC"])
         p = Participants(names)
         print("\tVALID: ", p)
     except Exception as err:
