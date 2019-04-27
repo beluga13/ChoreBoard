@@ -1,0 +1,11 @@
+Changelog:
+- Implementation of sqlite3 package for database use (creation and storage of .db file)
+- Overhaul of 'create_household' and 'view_household' functions to incorporate accessing, 
+  storage, and read of database file
+- Removal of 'chosen_participants' and 'chosen_chores' functions as considered redundant due 
+  to overhaul of 'view_household'
+- Creation of 'log_chores' and 'show_leaderboard' functions
+- Implementation of editing capabilities of the database, specifically adding, removing,
+  and wiping the database
+- 
+

@@ -22,6 +22,7 @@ class ChoresList() :
         try :
             self.valid_chores(the_chores)
             self._chores = the_chores
+
         except ValueError as err :
             raise
 
@@ -70,7 +71,7 @@ class ChoresList() :
             raise
         
         return True
-        
+     
     @staticmethod        
     def is_valid_length(the_chores) :    
         if len(the_chores) < ChoresList.MINIMUM_NUMBER_OF_CHORES or \
@@ -122,7 +123,7 @@ class Chore():
     ## Constants used for validation
     MINIMUM_NAME_LENGTH = 3     # Used to validate team member's name, household name and chore name
     MAXIMUM_NAME_LENGTH = 20
-    
+
     MINIMUM_CHORE_FREQUENCY = 1
     MAXIMUM_CHORE_FREQUENCY = 20
 
